@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta
+    name="viewport"
+    content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover"
+  />
+  <title>Puzzle Box — Fresh Build</title>
+  <meta name="theme-color" content="#0b0b0b" />
+
+  <style>
+    :root {
+      --obsidian: #0b0b0b;
+      --obsidian-2: #111213;
+      --crimson: #741d2a;
+      --brass: #a98a4a;
+      --ink: #dcd6c4;
+    }
+    html, body {
+      margin: 0; padding: 0;
+      width: 100%; height: 100%;
+      background: radial-gradient(ellipse at center, #0b0b0b 0%, #050505 60%, #000 100%);
+      color: var(--ink);
+      font-family: ui-serif, Georgia, "Times New Roman", serif;
+      -webkit-tap-highlight-color: transparent;
+    }
+    #stage { position: fixed; inset: 0; touch-action: none; }
+    /* UI */
+    .ui {
+      position: fixed; left: 0; right: 0; bottom: 0;
+      display: flex; justify-content: space-between; gap: .5rem;
+      padding: .5rem .75rem; pointer-events: none;
+    }
+    .ui > div { pointer-events: auto; display: flex; gap: .5rem; }
+    button {
+      background: rgba(0,0,0,.6);
+      color: var(--ink);
+      border: 1px solid #2a2a2a;
+      border-radius: 8px;
+      padding: .55rem .8rem;
+      font-size: .95rem; letter-spacing: .02em;
+    }
+    button:active { transform: translateY(1px); }
+    /* Top status */
+    .status {
+      position: fixed; top: .5rem; left: .5rem;
+      background: rgba(0,0,0,.55);
+      border: 1px solid #262626;
+      border-radius: 8px; padding: .4rem .6rem;
+      font-size: .8rem;
+    }
+    /* Stanza glow strip (appears as steps progress) */
+    #stanzaStrip {
+      position: fixed; top: .5rem; right: .5rem; max-width: 60vw;
+      padding: .5rem .75rem; border-radius: 8px;
+      background: linear-gradient(90deg, rgba(116,29,42,.35), rgba(116,29,42,.05));
+      border: 1px solid rgba(116,29,42,.4);
+      font-size: .9rem; display: none;
+      box-shadow: 0 0 16px rgba(116,29,42,.2);
+    }
+    /* Mobile-safe hit helpers */
+    .hit { touch-action: none; }
+  </style>
+
+  <!-- Three.js + helpers (pin versions for stability) -->
+  <script src="https://unpkg.com/three@0.152.2/build/three.min.js"></script>
+  <script src="https://unpkg.com/three@0.152.2/examples/js/controls/OrbitControls.js"></script>
+  <script src="https://unpkg.com/three@0.152.2/examples/js/loaders/RGBELoader.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+</head>
+<body>
+  <canvas id="stage"></canvas>
+
+  <div class="status" id="status">Step: 0 — “Prick to begin”</div>
+  <div id="stanzaStrip"></div>
+
+  <div class="ui">
+    <div>
+      <button id="zoomOutBtn" aria-label="Zoom out">Zoom out</button>
+    </div>
+    <div>
+      <button id="resetBtn" aria-label="Reset">Reset</button>
+      <button id="muteBtn" aria-label="Toggle audio">Audio</button>
+    </div>
+  </div>
+
+  <script src="./script.js"></script>
+</body>
+</html>
